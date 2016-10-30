@@ -1,0 +1,1 @@
+from pagespeed.pagespeed import PageSpeed
