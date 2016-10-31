@@ -1,5 +1,5 @@
 import requests
-from responses import DesktopPageSpeed, MobilePageSpeed
+from pagespeed.responses import DesktopPageSpeed, MobilePageSpeed
 
 
 class PageSpeed(object):
@@ -31,7 +31,7 @@ class PageSpeed(object):
 
         kwargs.setdefault('filter_third_party_resources', False)
         kwargs.setdefault('screenshot', False)
-        kwargs.setdefault('strategry', 'desktop')
+        kwargs.setdefault('strategy', 'desktop')
 
         params = kwargs.copy()
         params.update({'url': url})
