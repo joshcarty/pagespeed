@@ -1,1 +1,1 @@
-from pagespeed.pagespeed import PageSpeed
+from pagespeed import PageSpeed

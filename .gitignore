@@ -1,1 +1,4 @@
 .idea
+/pagespeed.pyproj
+/pagespeed/__pycache__
+/.vs/pagespeed/v14

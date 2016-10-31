@@ -1,5 +1,5 @@
 import requests
-from pagespeed.responses import DesktopPageSpeed, MobilePageSpeed
+from responses import DesktopPageSpeed, MobilePageSpeed
 
 
 class PageSpeed(object):
