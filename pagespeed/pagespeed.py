@@ -37,11 +37,15 @@ class PageSpeed(object):
             'url': url
         }
 
-        response = requests.get(self.endpoint, params=params)
-
-        if strategy == 'desktop':
-            return DesktopPageSpeed(response)
-        elif strategy == 'mobile':
-            return MobilePageSpeed(response)
-        else:
+        strategy = strategy.lower()
+        if strategy not in ('mobile', 'desktop'):
             raise ValueError('invalid strategy: {0}'.format(strategy))
+
+        raw = requests.get(self.endpoint, params=params)
+
+        if strategy == 'mobile':
+            response = MobilePageSpeed(raw)
+        else:
+            response = DesktopPageSpeed(raw)
+
+        return response
