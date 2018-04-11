@@ -14,7 +14,8 @@ class PageSpeed(object):
         self.api_key = api_key
         self.endpoint = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed'
 
-    def analyse(self, url, **kwargs):
+    def analyse(self, url, filter_third_party_resources=False, screenshot=False,
+                strategy='desktop'):
         """Run PageSpeed test
 
         Args:
@@ -29,18 +30,18 @@ class PageSpeed(object):
 
         """
 
-        kwargs.setdefault('filter_third_party_resources', False)
-        kwargs.setdefault('screenshot', False)
-        kwargs.setdefault('strategy', 'desktop')
-
-        params = kwargs.copy()
-        params.update({'url': url})
+        params = {
+            'filter_third_party_resources': filter_third_party_resources,
+            'screenshot': screenshot,
+            'strategy': strategy,
+            'url': url
+        }
 
         response = requests.get(self.endpoint, params=params)
 
-        if kwargs.get('strategy') == 'desktop':
+        if strategy == 'desktop':
             return DesktopPageSpeed(response)
-        elif kwargs.get('strategy') == 'mobile':
+        elif strategy == 'mobile':
             return MobilePageSpeed(response)
         else:
-            raise ValueError('invalid strategy: {0}'.format(kwargs.get('strategy')))
+            raise ValueError('invalid strategy: {0}'.format(strategy))
